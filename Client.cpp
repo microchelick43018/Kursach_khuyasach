@@ -72,6 +72,43 @@ void Client::ShowGHInfoByNumber(int number)
 	_getch();
 }
 
+void Client::ShowGHWithBetMoreThan(int minBet)
+{
+	int firstGame = -1;
+	for (int i = 0; i < _gameHistory.size(); i++)
+	{
+		if (_gameHistory[i].GetBet() >= minBet)
+		{
+			firstGame = i;
+			cout << "Найдено соотвествие: " << endl;
+			cout.setf(ios::left);
+			cout << setw(5 + 6) << "№ игры";
+			cout << setw(5 + 13) << "Название игры";
+			cout << setw(5 + 4) << "Стол";
+			cout << setw(5 + 6) << "Ставка";
+			cout << setw(5 + 6) << "Выйгрыш";
+			cout << setw(5 + 6) << "Множитель" << endl;
+			cout.unsetf(ios::left);
+			break;
+		}
+	}
+	if (firstGame == -1)
+	{
+		cout << "Соответствий не найдено!" << endl;
+	}
+	for (int i = firstGame; i < _gameHistory.size(); i++)
+	{
+		if (_gameHistory[i].GetBet() >= minBet)
+		{
+			cout.setf(ios::left);
+			_gameHistory[i].ShowInfo();
+			cout.unsetf(ios::left);
+		}
+	}
+	cout << "Нажмите любую клавишу, чтобы продолжить...";
+	_getch();
+}
+
 Client::Client()
 {
 	_balance = 0;
@@ -114,7 +151,7 @@ void Client::GetInfoFromFile(string fullName)
 	fs.open(FileManager::GetClientPath() + fullName, ios::in | ios::binary);
 	fs.read((char*)&Password, sizeof(char) * 100);
 	fs.read((char*)&_balance, sizeof(int));
-	int vectorLength = _gameHistory.size();
+	int vectorLength;
 	fs.read((char*)&vectorLength, sizeof(int));
 	GameHistory gH;
 	for (int i = 0; i < vectorLength; i++)
@@ -144,10 +181,9 @@ void Client::AddGameHistory(int gameNumber, string gameName, int bet, char table
 
 void Client::ShowGameHistory()
 {
-
 	if (_gameHistory.size() == 0)
 	{
-		cout << "Вы еще не сыграли ни одну игру." << endl;
+		cout << "История игр пуста!" << endl;
 		return;
 	}
 	bool exit = false;
@@ -168,8 +204,9 @@ void Client::ShowGameHistory()
 		cout << "1 - Отсортировать по столам." << endl;
 		cout << "2 - Отсортировать по номеру игры." << endl;
 		cout << "3 - Поиск игры по его номеру." << endl;
-		cout << "4 - Закончить просмотр." << endl;
-		int choice = MakeAChoice(4);
+		cout << "4 - Отфильтровать по размеру ставки." << endl;
+		cout << "5 - Закончить просмотр." << endl;
+		int choice = MakeAChoice(5);
 		system("cls");
 		if (choice == 1)
 		{
@@ -187,8 +224,15 @@ void Client::ShowGameHistory()
 		}
 		else if (choice == 4)
 		{
+			cout << "Введите минимальную ставку: ";
+			int minBet = ReadInt();
+			ShowGHWithBetMoreThan(minBet);
+		}
+		else if (choice == 5)
+		{
 			exit = true;
 		}
+		system("cls");
 	}
 }
 
@@ -205,4 +249,19 @@ int Client::GetBalance()
 void Client::SetBalance(int newBalance)
 {
 	_balance = newBalance;
+}
+
+void Client::ClearGameHistory()
+{
+	cout << "Вы действительно хотите очистить историю? 1 - Да, 2 - Нет" << endl;
+	int choice = MakeAChoice(1, 2);
+	if (choice == 1)
+	{
+		_gameHistory.clear();
+		cout << "Успешно!" << endl;
+	}
+	else
+	{
+		cout << "Отмена действия." << endl;
+	}
 }

@@ -15,6 +15,7 @@ private:
 	void SortGHByTableName();
 	void SortGhByGameNumber();
 	void ShowGHInfoByNumber(int number);
+	void ShowGHWithBetMoreThan(int minBet);
 public:
 	Client();
 
@@ -42,5 +43,7 @@ public:
 	int GetBalance();
 
 	void SetBalance(int newBalance);
+
+	void ClearGameHistory();
 };
 

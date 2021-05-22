@@ -22,5 +22,7 @@ public:
 	int GetGameNumber();
 
 	char GetTableName();
+
+	int GetBet();
 };
 

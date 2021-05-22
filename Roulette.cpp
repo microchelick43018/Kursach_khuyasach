@@ -8,8 +8,6 @@ void Roulette::ShowMenu()
     cout << "3 - Поставить на черное." << endl;
 
     cout << "4 - Поставить на конкретное число" << endl;
-
-    cout << "5 - Отмена." << endl;
 }
 
 Roulette::Roulette()
@@ -26,12 +24,8 @@ int Roulette::Play(int bet)
     FileManager::IncGameCount();
     int chosenNumber = -1;
     ShowMenu();
-    int choice = MakeAChoice(5);
-    if (choice == 5)
-    {
-        return -1;
-    }
-    else if (choice == 4)
+    int choice = MakeAChoice(4);
+    if (choice == 4)
     {
         cout << "Выберите число (0 - 36): " << endl;
         chosenNumber = MakeAChoice(0, 36);
@@ -55,17 +49,24 @@ int Roulette::Play(int bet)
     default:
         break;
     }
-    if (chosenNumber != -1 && chosenNumber == droppedNumber)
+    if (chosenNumber != -1)
     {
-        cout << "Поздравляем ваш выйгрыш составил " << bet * 36 << " (36x)!" << endl;
-        return bet * 36;
+        if (chosenNumber == droppedNumber)
+        {
+            cout << "Поздравляем ваш выйгрыш составил " << bet * 36 << " (36x)!" << endl;
+            return bet * 36;
+        }
+        else
+        {
+            cout << "Ставка не сыграла." << endl;
+            return 0;
+        }
     }
-    if (_cells[choice - 1] == droppedColor)
+    else if (_cells[choice - 1] == droppedColor)
     {
         cout << "Поздравляем ваш выйгрыш составил " << bet * 2 << " (2x)!" << endl;
         return bet * 2;
     }
     cout << "Ставка не сыграла." << endl;
     return 0;
-
 }

@@ -3,6 +3,7 @@ const string FileManager::CLIENT_PATH = "Clients/";
 const string FileManager::DEALER_PATH = "Dealers/";
 const string FileManager::TABLES_PATH = "Tables/";
 const string FileManager::GAME_NUMBER_PATH = "GameCount";
+
 string FileManager::GetDealerPath()
 {
 	return DEALER_PATH;

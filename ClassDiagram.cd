@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BlackJack">
+    <Position X="7.75" Y="2.25" Width="1.75" />
+    <NestedTypes>
+      <Struct Name="BlackJack::Card" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>BlackJack.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAQAAAAAIAAAQAgCwAAAABACA=</HashCode>
+      <FileName>BlackJack.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client">
+    <Position X="5.25" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>FAEACCAAAASBAgAAAEAIAACAAAAAAAICAIAhAEAAAAQ=</HashCode>
+      <FileName>Client.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dealer">
+    <Position X="0.5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAQAABEAAAEAAAAAAAAAAAIAAAEAADIA=</HashCode>
+      <FileName>Dealer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileManager" Collapsed="true">
+    <Position X="3.5" Y="2.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>CACAAAAAAAEAAAAAAEiAAIAgAAgAAAQAAAACAAQEggA=</HashCode>
+      <FileName>FileManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game">
+    <Position X="10" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAABBAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHistory">
+    <Position X="9.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAACBEAAAgAAAAAABAAAAMEAAAAAAAA=</HashCode>
+      <FileName>GameHistory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Roulette">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAABAAAAAAAAAAAAAAAAgAAAAAABAAA=</HashCode>
+      <FileName>Roulette.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Table&lt;game&gt;">
+    <Position X="13.75" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAIAAAAACAAACBBEAAQEAAAAAABAAAQIAABAAABoQ=</HashCode>
+      <FileName>Table.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="User">
+    <Position X="3" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAACIABAEAAAAAAgAAAABAKAIAAAAAAAAA=</HashCode>
+      <FileName>User.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -60,3 +60,13 @@ char GameHistory::GetTableName()
 {
 	return _result[29];
 }
+
+int GameHistory::GetBet()
+{
+	string bet = "";
+	for (int i = 38; _result[i] != ' '; i++)
+	{
+		bet += _result[i];
+	}
+	return stoi(bet);
+}

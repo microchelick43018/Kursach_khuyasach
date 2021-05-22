@@ -10,7 +10,8 @@ namespace MenuManager
 		cout << "2 - Поплнить баланс." << endl;
 		cout << "3 - Вывод баланса." << endl;
 		cout << "4 - Просмотр истории игр." << endl;
-		cout << "5 - Выход из аккаунта" << endl;
+		cout << "5 - Очистить историю игр." << endl;
+		cout << "6 - Выход из аккаунта" << endl;
 	}
 
 	void MenuManager::ShowDealerMenu()
@@ -18,7 +19,7 @@ namespace MenuManager
 		cout << "1 - Сесть за стол." << endl;
 		cout << "2 - Выйти со стола." << endl;
 		cout << "3 - Просмотреть информацию о себе." << endl;
-		cout << "4 - Выход в главное меню." << endl;
+		cout << "4 - Выход из аккаунта." << endl;
 	}
 
 	void MenuManager::ShowMainMenu()
@@ -125,7 +126,7 @@ void MakingChoice::WorkAsClient(Client& client)
 		system("cls");
 		client.ShowBalance();
 		MenuManager::ShowClientMenu();
-		choice = MakeAChoice(5);
+		choice = MakeAChoice(6);
 		switch (choice)
 		{
 		case 1:
@@ -150,7 +151,6 @@ void MakingChoice::WorkAsClient(Client& client)
 				if (client.GetBalance() < 100)
 				{
 					cout << "У вас недостаточно баланса для игры!" << endl;
-					exit = true;
 					exit2 = true;
 					break;
 				}
@@ -162,7 +162,13 @@ void MakingChoice::WorkAsClient(Client& client)
 				{
 					int balance = client.GetBalance();
 					cout << "Сделайте ставку: ";
-					int bet = MakeAChoice(1, balance), win = 0;
+					int bet = MakeAChoice(100, balance), win = 0;
+					ManipulateWithBet(bet, balance);
+					if (bet == 0)
+					{
+						system("cls");
+						continue;
+					}
 					balance -= bet;
 					if (choice <= temp)
 					{
@@ -174,10 +180,19 @@ void MakingChoice::WorkAsClient(Client& client)
 					else
 					{
 						choice -= (temp + 1);
-						FileManager::IncDealerGameCount(rouletteTables[choice].GetDealerName());
 						win = rouletteTables[choice].PlayGame(bet);
-						client.AddGameHistory(gameNumber, "Рулетка", bet, rouletteTables[choice].GetName(),
-							rouletteTables[choice].GetDealerName(), win);
+						if (win == -1)
+						{
+							win = 0;
+							balance += bet;
+							client.SetBalance(balance);
+						}
+						else
+						{
+							FileManager::IncDealerGameCount(rouletteTables[choice].GetDealerName());
+							client.AddGameHistory(gameNumber, "Рулетка", bet, rouletteTables[choice].GetName(),
+								rouletteTables[choice].GetDealerName(), win);
+						}
 						choice += (temp + 1);
 					}
 					client.SetBalance(balance + win);
@@ -214,6 +229,11 @@ void MakingChoice::WorkAsClient(Client& client)
 			break;
 		}
 		case 5:
+		{
+			client.ClearGameHistory();
+			break;
+		}
+		case 6:
 		{
 			exit = true;
 			break;

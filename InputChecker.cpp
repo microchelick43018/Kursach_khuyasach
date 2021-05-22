@@ -137,6 +137,47 @@ int MakeAChoice(int minNumber, int maxNumber)
 	return choice;
 }
 
+void GetterForThread(int& value)
+{
+	value = _getch() - '0';
+}
+
+void ManipulateWithBet(int& bet, int &currentBalance)
+{
+	int i = 10;
+	int choice = -1;
+	system("cls");
+	thread t1(GetterForThread, ref(choice));
+	while (choice == -1 && i != 0)
+	{
+		cout << "1 - Подтвердить ставку." << endl;
+		cout << "2 - Редактировать ставку." << endl;
+		cout << "3 - Отменить ставку." << endl;
+		cout << "У вас есть " << i << " секунд, чтобы изменить выбор." << endl;
+		this_thread::sleep_for(1s);
+		i--;
+		system("cls");
+	}
+	if (i == 0)
+	{
+		cout << "Ставка принята (" << bet << "$).\nНажмите на любую клавишу, чтобы продолжить..." << endl;
+	}
+	t1.join();
+	if (i == 0 || choice == 1)
+	{
+		return;
+	}
+	else if (choice == 2)
+	{
+		cout << "Введите новую ставку: ";
+		bet = MakeAChoice(100, currentBalance);
+	}
+	else if (choice == 3)
+	{
+		bet = 0;
+	}
+}
+
 bool ReadBankCard()
 {
 	int i;
@@ -249,12 +290,4 @@ bool ReadBankCardNumber()
 		}
 	}
 	return true;
-}
-
-template<class T>
-void Swap(T& t1, T& t2)
-{
-	T temp1 = t1;
-	t1 = t2;
-	t2 = temp1;
 }

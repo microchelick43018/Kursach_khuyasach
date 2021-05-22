@@ -29,5 +29,7 @@ public:
 	void ShowInfo();
 
 	friend ostream& operator <<(ostream& os, Dealer& d);
+
+	friend istream& operator>>(istream& is, Dealer& d);
 };
 
